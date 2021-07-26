@@ -9,6 +9,12 @@ public class MenuManager : MonoBehaviour
     public GameObject settingMenu;
     public GameObject levelSelectMenu;
     int gameLevels;
+
+    //public static bool isPause = false;
+    public GameObject pauseMenu;
+    public GameObject gameMenu;
+
+    //MAIN MENU
     public void SwitchLevelSelection()
     {
         mainMenu.SetActive(false);
@@ -29,6 +35,7 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
+    //SETTINGS
     public void AdjustVolume()
     {
 
@@ -62,87 +69,37 @@ public class MenuManager : MonoBehaviour
         settingMenu.SetActive(false);
     }
 
-    public void SelectLevel1()
-    {
-        gameLevels = 0;
-        Debug.Log("Select Level 1");
-    }
 
-    public void SelectLevel2()
-    {
-        gameLevels = 1;
-        Debug.Log("Select Level 2");
-    }
+    //LEVEL SELECTION
+    string levelName;
 
-    public void SelectLevel3()
+    public void SelectLevel(string level)
     {
-        gameLevels = 2;
-        Debug.Log("Select Level 3");
-    }
-
-    public void SelectLevel4()
-    {
-        gameLevels = 3;
-        Debug.Log("Select Level 4");
-    }
-
-    public void SelectLevel5()
-    {
-        gameLevels = 4;
-        Debug.Log("Select Level 5");
-    }
-
-    public void SelectLevel6()
-    {
-        gameLevels = 5;
-        Debug.Log("Select Level 6");
-    }
-
-    public void SelectLevel7()
-    {
-        gameLevels = 6;
-        Debug.Log("Select Level 7");
+        levelName = level;
     }
 
     public void PlayLevel()
     {
-        int tempSelectLevel = gameLevels;
-        switch (tempSelectLevel)
-        {
-            case 0:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                Debug.Log("Play Level 1");
-                break;
+        SceneManager.LoadScene(levelName);
+    }
 
-            case 1:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
-                Debug.Log("Play Level 2");
-                break;
+    //PAUSE MENU
+    public void Pause()
+    {
+        gameMenu.SetActive(false);
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+    }
 
-            case 2:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
-                Debug.Log("Play Level 3");
-                break;
+    public void Resume()
+    {
+        pauseMenu.SetActive(false);
+        gameMenu.SetActive(true);
+        Time.timeScale = 1f;
+    }
 
-            case 3:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 4);
-                Debug.Log("Play Level 4");
-                break;
-
-            case 4:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 5);
-                Debug.Log("Play Level 5");
-                break;
-
-            case 5:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 6);
-                Debug.Log("Play Level 6");
-                break;
-
-            case 6:
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 7);
-                Debug.Log("Play Level 7");
-                break;
-        }
+    public void LeaveLevel()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 }
