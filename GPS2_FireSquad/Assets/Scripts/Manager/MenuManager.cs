@@ -88,14 +88,12 @@ public class MenuManager : MonoBehaviour
     {
         gameMenu.SetActive(false);
         pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
     }
 
-    public void Resume()
+    public void Confirm()
     {
-        pauseMenu.SetActive(false);
         gameMenu.SetActive(true);
-        Time.timeScale = 1f;
+        pauseMenu.SetActive(false);
     }
 
     public void LeaveLevel()
